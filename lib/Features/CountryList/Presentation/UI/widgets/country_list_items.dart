@@ -1,12 +1,12 @@
 import 'package:countrylist/Features/CountryList/Data/country_api_service.dart';
-import 'package:countrylist/Features/CountryList/Presentation/State/countries_bloc.dart';
-import 'package:countrylist/Features/CountryList/Presentation/State/rename_country_bloc.dart';
-import 'package:countrylist/Features/CountryList/Presentation/State/selected_country_cubit.dart';
 import 'package:countrylist/Features/CountryList/Presentation/UI/widgets/edit_country_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../Domain/Models/country_model.dart';
+import '../../Bloc/countries_bloc.dart';
+import '../../Bloc/rename_country_bloc.dart';
+import '../../Bloc/selected_country_cubit.dart';
 
 class CountryListItems extends StatefulWidget {
   const CountryListItems({Key? key}) : super(key: key);

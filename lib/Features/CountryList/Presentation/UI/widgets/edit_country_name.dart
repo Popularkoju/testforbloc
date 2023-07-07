@@ -1,7 +1,8 @@
 import 'package:countrylist/Features/CountryList/Domain/Models/country_model.dart';
 import 'package:flutter/material.dart';
 
-import '../../State/selected_country_cubit.dart';
+import '../../Bloc/selected_country_cubit.dart';
+
 
 class EditCountryName extends StatefulWidget {
   const EditCountryName({Key? key}) : super(key: key);

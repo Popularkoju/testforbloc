@@ -1,10 +1,9 @@
 import 'package:countrylist/Features/CountryList/Data/country_api_service.dart';
-import 'package:countrylist/Features/CountryList/Presentation/State/countries_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'Features/CountryList/Presentation/State/selected_country_cubit.dart';
-import 'Features/HomeScreen/Presentation/Controller/homepage_controller_cubit.dart';
+import 'Features/CountryList/Presentation/Bloc/countries_bloc.dart';
+import 'Features/HomeScreen/Presentation/Bloc/homepage_controller_cubit.dart';
 import 'Features/HomeScreen/Presentation/UI/home_screen.dart';
 
 Future<void> main() async {
