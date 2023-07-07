@@ -28,6 +28,7 @@ class RenameCountryBloc extends Bloc<RenameCountryEvent, RenameCountryState> {
     }
 
     on((event, emit) {
+
       // RenameCountryState(event);
       if (event is SelectObjectEvent) {
         emit(RenameCountryState(event.object));
@@ -39,6 +40,6 @@ class RenameCountryBloc extends Bloc<RenameCountryEvent, RenameCountryState> {
         }
       }
       // TODO: implement event handler
-    });
-  }
+    });}
+
 }

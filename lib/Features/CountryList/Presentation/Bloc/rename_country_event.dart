@@ -9,7 +9,7 @@ class SelectObjectEvent extends RenameCountryEvent {
 
   @override
   // TODO: implement props
-  List<Object?> get props => [object];
+  List<Object?> get props => [];
 }
 
 class RenameObjectEvent extends RenameCountryEvent {

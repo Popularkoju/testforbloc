@@ -1,7 +1,9 @@
 import 'package:countrylist/Features/CountryList/Data/country_api_service.dart';
 import 'package:countrylist/Features/CountryList/Presentation/UI/widgets/edit_country_name.dart';
+import 'package:countrylist/Features/LocalCountry/Presentation/bloc/addcountrytolocal_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 import '../../../Domain/Models/country_model.dart';
 import '../../Bloc/countries_bloc.dart';
@@ -61,36 +63,40 @@ class _CountryListItemsState extends State<CountryListItems> {
                         showModalBottomSheet(
                             context: context,
                             builder: (_) {
+                              _nameController.text =
+                                  _objectBloc.state.selectedCountry!.name;
                               return BlocBuilder<RenameCountryBloc,
                                   RenameCountryState>(
                                 bloc: _objectBloc,
                                 builder: (context, state) {
-                                  if(state is RenameCountryState){
-                                    print(state.selectedCountry);
-                                    _nameController.text = state.selectedCountry!.name;
-
-                                    return Column(
-                                      children: [
-                                        SizedBox(height: 24,),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextField(
-                                            controller: _nameController,
-                                            onSubmitted: (v) {
-                                              _objectBloc.add(RenameObjectEvent(v));
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        )
-                                      ],
-                                    );
-                                    print(state.selectedCountry?.name);
-                                  }else{
-                                    return Container();
-                                  }
+                                  return Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 24,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextField(
+                                          controller: _nameController,
+                                          onSubmitted: (v) {
+                                            _objectBloc
+                                                .add(RenameObjectEvent(v));
+                                            AddCountrytolocalBloc local =
+                                                AddCountrytolocalBloc();
+                                            local.add(AddCountryEvent(
+                                                CountryModel(v)));
+                                            // var countriesBox = Hive.box('countries');
+                                            // CountryModel country = CountryModel(v);
+                                            // countriesBox.put(v,country);
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      )
+                                    ],
+                                  );
+                                  print(state.selectedCountry?.name);
 
                                   // _nameController.text = state.selectedCountry!.name.toString();
-
                                 },
                               );
                             });
@@ -104,7 +110,7 @@ class _CountryListItemsState extends State<CountryListItems> {
                                     offset: const Offset(0, 2))
                               ]),
                           child: ListTile(
-                              leading: Text(
+                              title: Text(
                             countries[index].name,
                             style: const TextStyle(fontSize: 16),
                           ))),
@@ -129,32 +135,36 @@ class _CountryListItemsState extends State<CountryListItems> {
                           onTap: () {
                             _selectedCountryBloc.selectObject(countries[index]);
 
-                            if (_selectedCountryBloc.selectedObjectStream != null) {
-                              if(snapshot.hasData && snapshot.data!=null){
+                            if (_selectedCountryBloc.selectedObjectStream !=
+                                null) {
+                              if (snapshot.hasData && snapshot.data != null) {
                                 // _nameController.text = snapshot.data!.name;
                                 showModalBottomSheet(
                                     context: context,
                                     builder: (_) {
-
-                                      _nameController.text = snapshot.data!.name;
+                                      _nameController.text =
+                                          snapshot.data!.name;
                                       return Column(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.center,
                                         children: [
-                                          TextField(
-                                            controller: _nameController,
-                                            onSubmitted: (v) {
-                                              _selectedCountryBloc.renameObject(v);
-                                              Navigator.of(context).pop();
-                                            },
+                                          SizedBox(
+                                            height: 24,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: TextField(
+                                              controller: _nameController,
+                                              onSubmitted: (v) {
+                                                _objectBloc
+                                                    .add(RenameObjectEvent(v));
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
                                           )
                                         ],
                                       );
                                     });
                               }
-
                             }
-
                           },
                           child: Container(
                               decoration: BoxDecoration(

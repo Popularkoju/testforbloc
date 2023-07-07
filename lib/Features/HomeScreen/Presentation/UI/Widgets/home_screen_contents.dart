@@ -1,3 +1,4 @@
+import 'package:countrylist/Features/LocalCountry/Presentation/UI/local_country_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,12 +10,14 @@ class HomeScreenContents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IndexedStack(
-      index:context.watch<HomepageControllerCubit>().state.pageIndex,
-      children: [
-        const CountryListItems(),
-        Container(color: Colors.green)
-      ],
+    return Scaffold(
+      body: IndexedStack(
+        index:context.watch<HomepageControllerCubit>().state.pageIndex,
+        children: [
+          const CountryListItems(),
+         LocalCountryList(),
+        ],
+      ),
     );
   }
 }

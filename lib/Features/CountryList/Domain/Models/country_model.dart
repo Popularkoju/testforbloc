@@ -1,19 +1,15 @@
-import 'dart:convert';
+import 'package:hive/hive.dart';
+part 'country_model.g.dart';
 
-import 'package:equatable/equatable.dart';
 
-class CountryModel extends Equatable{
+@HiveType(typeId: 0)
+class CountryModel extends HiveObject {
+  @HiveField(0)
   String name;
 
   CountryModel(this.name);
 
   factory CountryModel.fromJson(Map<String, dynamic> json) {
-
     return CountryModel(json["country_name"]);
   }
-
-  @override
-  // // TODO: implement props
-  List<Object?> get props =>[name];
-
 }

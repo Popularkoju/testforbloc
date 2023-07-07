@@ -15,7 +15,5 @@ class GetCountryList extends CountriesEvent{
 
 class SelectedCountryEvent extends CountriesEvent{
   CountryModel? get selectedCountry => selectedCountry;
-
-
 }
 
